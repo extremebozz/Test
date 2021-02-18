@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "DaftarPinjaman";
+}
+
+<h1 class="text-center">Daftar Pinjaman</h1>
+<table class="table table-striped">
+    <thead>
+        <tr class="text-center">
+            <th scope="col">Nama</th>
+            <th scope="col">NPM</th>
+            <th scope="col">Jumlah Buku</th>
+            <th scope="col">Total Harga</th>
+            <th scope="col">Kode Buku</th>
+            <th scope="col">Nama Buku</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model)
+        {
+            <tr>
+                <td class="text-center align-middle" rowspan="@(data.DaftarBuku.Count + 1)">@data.Nama</td>
+                <td rowspan="@(data.DaftarBuku.Count + 1)" class="align-middle">@data.Npm</td>
+                <td rowspan="@(data.DaftarBuku.Count + 1)" class="align-middle">@data.JumlahBuku</td>
+                <td rowspan="@(data.DaftarBuku.Count + 1)" class="align-middle">@string.Format("{0:#,###}", @data.TotalHarga)</td>
+            </tr>
+            @foreach (var i in data.DaftarBuku)
+            {
+            <tr>
+                <td>@i.KodeBuku</td>
+                <td>@i.NamaBuku</td>
+            </tr>
+            }
+        }
+        </tbody>
+    </table>

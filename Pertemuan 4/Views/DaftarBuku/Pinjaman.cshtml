@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Form Pinjaman";
+}
+@model DaftarLaporan
+<h1>Pinjaman</h1>
+<form asp-controller="DaftarBuku" asp-action="TambahPinjaman" method="post">
+    <div class="form-group">
+        <label asp-for="Nama">Nama</label>
+        <input type="text" class="form-control" asp-for="Nama" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Npm">NPM</label>
+        <input type="number" class="form-control" asp-for="Npm" />
+    </div>
+    <!--<div class="form-group">
+        <label asp-for="JumlahBuku">Jumlah</label>
+        <select class="form-control" asp-for="JumlahBuku">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+    </div>-->
+    <div class="form-group">
+        <label asp-for="DaftarBuku[0].KodeBuku">Pilih Buku Yang Ingin Dipinjam :</label>
+        <select class="form-control" name="DaftarBuku[0].KodeBuku" id="seleksi">
+            @foreach (var i in Model.DaftarBuku)
+            {
+                <option>@i.KodeBuku - @i.NamaBuku</option>
+            }
+        </select>
+    </div>
+    <div>
+        <input type="button" value="Menambah Buku" onClick="AddItem();" ID="add" class="btn btn-info">
+        <input type="submit" value="Pinjam" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+        function AddItem() {
+            var index = $('select[name^="DaftarBuku"]').length;
+            if (index > 2) {
+                alert("User Telah Meminjam Lebih Dari 3 Buku")
+                return;
+            } else {
+                $("#seleksi").after('<select class="form-control" name="DaftarBuku['+ index +'].KodeBuku"> @foreach (var i in Model.DaftarBuku) { <option>@i.KodeBuku - @i.NamaBuku</option>} </select>')
+            }            
+        }
+    </script>
+}

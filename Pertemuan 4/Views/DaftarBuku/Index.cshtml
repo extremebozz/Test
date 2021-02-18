@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Daftar Buku";
+}
+@model DaftarLaporan
+
+<h1 class="text-center">@ViewBag.DaftarBuku</h1>
+<table class="table table-striped">
+    <thead>
+        <tr class="text-center">
+            <th scope="col">Kode Buku</th>
+            <th scope="col">Nama Buku</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var daftar in Model.DaftarBuku)
+        {
+            <tr>
+                <td class="text-center">@daftar.KodeBuku</td>
+                <td>@daftar.NamaBuku</td>
+            </tr>
+        }
+    </tbody>    
+</table>
